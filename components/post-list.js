@@ -25,7 +25,7 @@ const PostList = ({ posts }) => (
         return (
           <div key={post.id} className="post">
             <motion.div variants={postVariants}>
-              <Link href="/posts/[post]" as={`/posts/${post.id}`}>
+              <Link scroll={false} href="/posts/[post]" as={`/posts/${post.id}`}>
                 <a>
                   <motion.div whileHover="hover" variants={{ hover: { scale: 0.96 } }}>
                     <img src={`/static/images/${post.id}.jpg`} />

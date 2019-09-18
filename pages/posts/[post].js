@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Link from 'next/link';
 import posts from '../../data/posts';
 import { motion } from 'framer-motion';
@@ -46,33 +47,39 @@ const backVariants = {
   }
 };
 
-const Post = ({ post }) => (
-  <div className="container post">
-    <motion.div initial="exit" animate="enter" exit="exit">
-      <motion.img variants={imageVariants} src={`/static/images/${post.id}.jpg`} />
+const Post = ({ post }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
-      <motion.div variants={textVariants}>
-        <PostInfo post={post} />
-        <p>{post.text}</p>
+  return (
+    <div className="container post">
+      <motion.div initial="exit" animate="enter" exit="exit">
+        <motion.img variants={imageVariants} src={`/static/images/${post.id}.jpg`} />
+
+        <motion.div variants={textVariants}>
+          <PostInfo post={post} />
+          <p>{post.text}</p>
+        </motion.div>
+
+        <motion.div variants={backVariants}>
+          <Link href="/">
+            <a>Back to list</a>
+          </Link>
+        </motion.div>
       </motion.div>
 
-      <motion.div variants={backVariants}>
-        <Link href="/">
-          <a>Back to list</a>
-        </Link>
-      </motion.div>
-    </motion.div>
-
-    <style jsx>{`
-      .post {
-        margin: 20px;
-      }
-      .post p {
-        margin: 40px 0;
-      }
-    `}</style>
-  </div>
-);
+      <style jsx>{`
+        .post {
+          margin: 20px;
+        }
+        .post p {
+          margin: 40px 0;
+        }
+      `}</style>
+    </div>
+  );
+};
 
 Post.getInitialProps = ({ query }) => {
   let post = posts.find(post => post.id == query.post);
