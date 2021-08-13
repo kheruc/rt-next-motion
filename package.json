@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "framer-motion": "^1.6.7",
-    "next": "^9.0.5",
+    "next": "^11.1.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0"
   },
